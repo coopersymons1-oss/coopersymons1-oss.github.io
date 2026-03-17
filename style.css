@@ -1,55 +1,96 @@
 body {
-  background: #111;
+  margin: 0;
+  background: radial-gradient(circle at center, #222, #000);
+  font-family: "Courier New", monospace;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  font-family: sans-serif;
   color: white;
 }
 
-/* DS Layout */
+/* DS Body */
 .ds {
-  width: 400px;
+  width: 420px;
 }
 
+/* Screens */
 .screen {
-  border: 4px solid #333;
-  border-radius: 12px;
-  padding: 20px;
-  margin: 10px 0;
+  border-radius: 18px;
+  padding: 15px;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.8),
+              0 10px 30px rgba(0,0,0,0.6);
 }
 
+/* Top Screen */
 .top {
-  height: 200px;
-  background: #000;
+  height: 220px;
+  background: linear-gradient(#0a0a0a, #000);
+  border: 6px solid #1a1a1a;
 }
 
+/* Hinge */
+.hinge {
+  height: 12px;
+  background: linear-gradient(#111, #000);
+  border-radius: 6px;
+  margin: 6px 0;
+}
+
+/* Bottom Screen */
 .bottom {
-  height: 150px;
-  background: #222;
+  height: 180px;
+  background: linear-gradient(#1c1c1c, #111);
+  border: 6px solid #2a2a2a;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+/* Content */
+.content {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.content.active {
+  opacity: 1;
+}
+
 /* Apps */
-.apps button {
-  margin: 10px;
-  font-size: 24px;
+.apps {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.app {
+  background: #2b2b2b;
+  border-radius: 12px;
   padding: 15px;
-  border-radius: 10px;
-  border: none;
+  text-align: center;
   cursor: pointer;
-  background: #444;
+  transition: 0.15s;
+  box-shadow: inset 0 -3px 0 #111;
 }
 
-.apps button:hover {
-  background: #666;
+.app:hover {
+  transform: scale(1.05);
+  background: #3a3a3a;
 }
 
-/* Intro animation */
-#intro {
+.app:active {
+  transform: scale(0.95);
+}
+
+.app span {
+  display: block;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+/* Boot screen */
+#boot {
   position: fixed;
   width: 100%;
   height: 100%;
@@ -57,20 +98,23 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: fadeOut 2s ease forwards;
+  z-index: 10;
+  animation: bootFade 1s ease forwards;
   animation-delay: 2s;
 }
 
-.logo {
-  font-size: 40px;
-  animation: scaleIn 2s ease;
+.boot-text {
+  font-size: 24px;
+  animation: blink 1s infinite;
 }
 
-@keyframes scaleIn {
-  from { transform: scale(0); }
-  to { transform: scale(1); }
+@keyframes bootFade {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
-@keyframes fadeOut {
-  to { opacity: 0; visibility: hidden; }
+@keyframes blink {
+  50% { opacity: 0.3; }
 }
